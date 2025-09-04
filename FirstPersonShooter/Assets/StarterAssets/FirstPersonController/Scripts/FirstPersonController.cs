@@ -11,6 +11,10 @@ namespace StarterAssets
 #endif
 	public class FirstPersonController : MonoBehaviour
 	{
+		[Header("Weapon")]
+		public Weapon weapon;
+
+		
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
@@ -120,6 +124,10 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			CameraRotation();
+			
+			if (weapon != null)
+				weapon.WeaponBobbing(_input.move, Grounded, _speed);
+
 		}
 
 		private void GroundedCheck()
