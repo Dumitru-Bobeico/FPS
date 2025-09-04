@@ -1036,7 +1036,6 @@ MonoBehaviour:
   recoverPercent: 0.7
   recoilUp: 0.05
   recoilBack: 0.05
-  camRecoil: {fileID: 7246470608179754748}
 --- !u!114 &1851338564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1152,11 +1151,7 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1587890762}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8181012442493754148, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7246470608179754748}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dccc5de572b63549bdfac8cdb2fbad4, type: 3}
 --- !u!114 &7246470608179754745 stripped
 MonoBehaviour:
@@ -1182,28 +1177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7246470608179754747 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8181012442493754148, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
-    type: 3}
-  m_PrefabInstance: {fileID: 7246470608179754744}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7246470608179754748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7246470608179754747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 405f88bba651f484593fe3d500f98fee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 6
-  returnSpeed: 25
-  RecoilRotation: {x: 2, y: 2, z: 2}
-  RecoilRotationAiming: {x: 0.5, y: 0.5, z: 1.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

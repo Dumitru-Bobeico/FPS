@@ -32,9 +32,7 @@ public class Weapon : MonoBehaviour
     public float recoilUp = 1f;
     public float recoilBack = 0f;
     
-    [Header("Recoil")]
-    public AdvancedCamRecoil camRecoil;
-
+    
     
     
     private Vector3 originalPosition;
@@ -93,8 +91,6 @@ public class Weapon : MonoBehaviour
     {
         recoiling = true;
         recovering = false;
-        
-        camRecoil.ApplyRecoil(Input.GetMouseButton(1));
         
         Ray ray = new Ray(camera.transform.position, camera.transform.forward);
         
