@@ -150,7 +150,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1536452411}
   m_Father: {fileID: 1340711851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &428874413
@@ -515,12 +516,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7246470608179754744}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &1340711856 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4097975442071298799, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
-    type: 3}
-  m_PrefabInstance: {fileID: 7246470608179754744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1385199509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,13 +663,63 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -744967892933103681, guid: be3ed9816d019ff4a85901f7a3aae376, type: 3}
+--- !u!1 &1536452410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536452411}
+  - component: {fileID: 1536452412}
+  m_Layer: 0
+  m_Name: WeaponHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536452411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536452410}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1587890762}
+  m_Father: {fileID: 428874412}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1536452412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536452410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29052cdde90351348b3d3dcfde26fe51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoilX: -2
+  recoilY: 2
+  recoilZ: 0.35
+  snappiness: 6
+  returnSpeed: 2
 --- !u!1001 &1587890761
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1340711851}
+    m_TransformParent: {fileID: 1536452411}
     m_Modifications:
     - target: {fileID: 450395799777040600, guid: d6aaacc9a8182ac49b2a4e370c02d43c,
         type: 3}
@@ -819,7 +864,7 @@ PrefabInstance:
     - target: {fileID: 4579612719276771722, guid: d6aaacc9a8182ac49b2a4e370c02d43c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.373
+      value: -0.37300014
       objectReference: {fileID: 0}
     - target: {fileID: 4579612719276771722, guid: d6aaacc9a8182ac49b2a4e370c02d43c,
         type: 3}
@@ -834,17 +879,17 @@ PrefabInstance:
     - target: {fileID: 4579612719276771722, guid: d6aaacc9a8182ac49b2a4e370c02d43c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4579612719276771722, guid: d6aaacc9a8182ac49b2a4e370c02d43c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4579612719276771722, guid: d6aaacc9a8182ac49b2a4e370c02d43c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4579612719276771722, guid: d6aaacc9a8182ac49b2a4e370c02d43c,
         type: 3}
@@ -1024,7 +1069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 25
   fireRate: 10
-  camera: {fileID: 1340711856}
+  camera: {fileID: 428874415}
   hitVFX: {fileID: 7275548786892498063, guid: f7c325215a56ad449a52b270d555344b, type: 3}
   mag: 5
   ammo: 30
@@ -1033,9 +1078,7 @@ MonoBehaviour:
   ammoText: {fileID: 7246470608179754745}
   animation: {fileID: 1851338565}
   reload: {fileID: 7400000, guid: a79dbc7513d3ddb47b06cb0e0be71e05, type: 2}
-  recoverPercent: 0.7
-  recoilUp: 0.05
-  recoilBack: 0.05
+  Recoil_Script: {fileID: 1536452412}
 --- !u!114 &1851338564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,10 +1190,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 428874412}
-    - targetCorrespondingSourceObject: {fileID: 4097975442071298792, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1587890762}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dccc5de572b63549bdfac8cdb2fbad4, type: 3}
 --- !u!114 &7246470608179754745 stripped
