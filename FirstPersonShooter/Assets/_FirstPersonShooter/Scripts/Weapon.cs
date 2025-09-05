@@ -139,7 +139,7 @@ public class Weapon : MonoBehaviour
     void AddRecoil()
     {
         float x = (Random.value - 0.5f) * recoilAmountX;
-        float y = timePressed >= maxRecoilTime ? recoilAmountY / 4 : recoilAmountY;
+        float y = ((Random.value - 0.5f) * 0.2f + 1f) * (timePressed >= maxRecoilTime ? recoilAmountY / 4 : recoilAmountY);
         recoilOffset += new Vector2(x, y);
     }
 
