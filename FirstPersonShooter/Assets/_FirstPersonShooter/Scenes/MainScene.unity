@@ -758,6 +758,32 @@ PrefabInstance:
       objectReference: {fileID: 1536452412}
     - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
         type: 3}
+      propertyPath: decalLifetime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
+        type: 3}
+      propertyPath: maxRecoilTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
+        type: 3}
+      propertyPath: recoilAmountX
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
+        type: 3}
+      propertyPath: recoilAmountY
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
+        type: 3}
+      propertyPath: bulletHolePrefab
+      value: 
+      objectReference: {fileID: 5475795876934316686, guid: c0aa25710ae8d814a8ab679ea4a70bfe,
+        type: 3}
+    - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
+        type: 3}
       propertyPath: muzzleFlashPosition
       value: 
       objectReference: {fileID: 1765680101514253906}
