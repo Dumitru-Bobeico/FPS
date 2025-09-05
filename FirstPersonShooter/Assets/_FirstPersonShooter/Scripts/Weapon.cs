@@ -11,6 +11,8 @@ public class Weapon : MonoBehaviour
 
     [Header("VFX")]
     public GameObject hitVFX;
+    public GameObject muzzleFlash;
+    public Transform muzzleFlashPosition;
 
     [Header("Ammo")]
     public int mag = 5;
@@ -69,6 +71,11 @@ public class Weapon : MonoBehaviour
 
     void Fire()
     {
+        GameObject Flash = Instantiate(muzzleFlash, muzzleFlashPosition.position, muzzleFlashPosition.rotation, muzzleFlashPosition);
+        Destroy(Flash, 0.1f);
+
+        
+        
         Recoil_Script.RecoilFire();
 
         Ray ray = new Ray(camera.transform.position, camera.transform.forward);
