@@ -97,11 +97,14 @@ public class Weapon : MonoBehaviour
         // Spawn muzzle flash as child to follow gun movement
         if (muzzleFlash != null && muzzleFlashPosition != null)
         {
-            GameObject flash = Instantiate(muzzleFlash, muzzleFlashPosition);
-            flash.transform.localPosition = Vector3.zero;
-            flash.transform.localRotation = Quaternion.identity;
+            GameObject flash = Instantiate(
+                muzzleFlash,
+                muzzleFlashPosition.position,
+                muzzleFlashPosition.rotation
+            );
             Destroy(flash, 0.1f);
         }
+
 
         Recoil_Script?.RecoilFire();
 
