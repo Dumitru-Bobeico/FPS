@@ -198,10 +198,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
         type: 3}
+      propertyPath: shootSFXIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
+        type: 3}
       propertyPath: bulletHolePrefab
       value: 
       objectReference: {fileID: 5475795876934316686, guid: c0aa25710ae8d814a8ab679ea4a70bfe,
         type: 3}
+    - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
+        type: 3}
+      propertyPath: playerSoundManager
+      value: 
+      objectReference: {fileID: 96964702}
     - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
         type: 3}
       propertyPath: muzzleFlashPosition
@@ -446,6 +456,135 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &828999409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 828999410}
+  - component: {fileID: 828999411}
+  m_Layer: 8
+  m_Name: ShootSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &828999410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828999409}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.375, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1487348686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &828999411
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828999409}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 60
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1014540634
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,6 +980,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -744967892933103681, guid: be3ed9816d019ff4a85901f7a3aae376, type: 3}
+--- !u!4 &1487348686 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2618416880974707867, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7246470608179754744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1536452410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,6 +1150,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
         type: 3}
+      propertyPath: playerSoundManager
+      value: 
+      objectReference: {fileID: 96964702}
+    - target: {fileID: 1331249539708172401, guid: 54776f8bec94cac4f8e8093a31c76ade,
+        type: 3}
       propertyPath: muzzleFlashPosition
       value: 
       objectReference: {fileID: 1765680101514253906}
@@ -1108,6 +1258,26 @@ PrefabInstance:
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1140730834792629895, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+        type: 3}
+      propertyPath: gunShootSource
+      value: 
+      objectReference: {fileID: 828999411}
+    - target: {fileID: 1140730834792629895, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+        type: 3}
+      propertyPath: allGunShootSFX.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140730834792629895, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+        type: 3}
+      propertyPath: 'allGunShootSFX.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 1d38ae01b31a61344ba063090acffa67, type: 3}
+    - target: {fileID: 1140730834792629895, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+        type: 3}
+      propertyPath: 'allGunShootSFX.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
     - target: {fileID: 1549526861497151965, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
         type: 3}
       propertyPath: weapon
@@ -1195,6 +1365,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 428874412}
+    - targetCorrespondingSourceObject: {fileID: 2618416880974707867, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 828999410}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dccc5de572b63549bdfac8cdb2fbad4, type: 3}
 --- !u!114 &7246470608179754745 stripped

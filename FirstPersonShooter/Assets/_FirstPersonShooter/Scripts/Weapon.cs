@@ -55,6 +55,11 @@ public class Weapon : MonoBehaviour
     private Vector2 recoilOffset;     // current recoil offset
     private Vector2 recoilVelocity;   // for SmoothDamp
 
+    [Header("SFX")]
+    public int shootSFXIndex = 0;
+
+    public PlayerSoundManager playerSoundManager;
+
     void Start()
     {
         initialLocalPos = transform.localPosition;
@@ -93,6 +98,8 @@ public class Weapon : MonoBehaviour
     {
         timePressed += Time.deltaTime;
         timePressed = Mathf.Min(timePressed, maxRecoilTime);
+        
+        playerSoundManager.PlayShootSFX(shootSFXIndex);
 
         // Spawn muzzle flash as child to follow gun movement
         if (muzzleFlash != null && muzzleFlashPosition != null)
