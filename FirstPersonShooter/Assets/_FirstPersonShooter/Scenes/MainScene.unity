@@ -1232,10 +1232,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 25
-  fireRate: 1
+  fireRate: 3
   camera: {fileID: 428874415}
-  pelletsCount: 1
-  sprayMulitplier: 0
+  pelletsCount: 5
+  sprayMulitplier: 1
   hitVFX: {fileID: 7275548786892498063, guid: f7c325215a56ad449a52b270d555344b, type: 3}
   muzzleFlash: {fileID: 3792523443395396232, guid: 089018eab863a974199a4c830fcff62f,
     type: 3}
