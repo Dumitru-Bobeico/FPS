@@ -119,6 +119,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &96964702 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1140730834792629895, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7246470608179754744}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b682ebc3836be543b6a7180e3fe8f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &278288728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -416,6 +428,12 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!224 &438384111 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3853899860626925322, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7246470608179754744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &577806693 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5788635157101655379, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
@@ -668,7 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  healthBar: {fileID: 7246470608179754747}
+  healthBar: {fileID: 438384111}
   healthText: {fileID: 577806693}
 --- !u!4 &1340711851 stripped
 Transform:
@@ -1095,6 +1113,16 @@ PrefabInstance:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 1851338563}
+    - target: {fileID: 1549526861497151965, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 96964702}
+    - target: {fileID: 1549526861497151965, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+        type: 3}
+      propertyPath: footstepInterval
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2269607625647154544, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
         type: 3}
       propertyPath: m_Name
@@ -1193,12 +1221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &7246470608179754747 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3853899860626925322, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
-    type: 3}
-  m_PrefabInstance: {fileID: 7246470608179754744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -13,6 +13,11 @@ namespace StarterAssets
 	{
 		[Header("Weapon")]
 		public Weapon weapon;
+		
+		[Header("Audio")]
+		public PlayerSoundManager soundManager;
+		public float footstepInterval = 0.5f; // time between footsteps when walking
+		private float footstepTimer;
 
 		
 		[Header("Player")]
@@ -119,6 +124,28 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			HandleFootsteps();
+		}
+
+		private void HandleFootsteps()
+		{
+			// Only play footsteps when moving on the ground
+			if (Grounded && _speed > 0.1f && _input.move.magnitude > 0.1f)
+			{
+				footstepTimer -= Time.deltaTime;
+
+				if (footstepTimer <= 0f)
+				{
+					soundManager?.PlayFootstepSFX();
+					footstepTimer = footstepInterval / (_input.sprint ? 1.5f : 1f); 
+					// faster steps when sprinting
+				}
+			}
+			else
+			{
+				// reset timer when not moving
+				footstepTimer = 0f;
+			}
 		}
 
 		private void LateUpdate()
