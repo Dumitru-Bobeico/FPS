@@ -668,6 +668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  healthBar: {fileID: 7246470608179754747}
   healthText: {fileID: 577806693}
 --- !u!4 &1340711851 stripped
 Transform:
@@ -1192,6 +1193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &7246470608179754747 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3853899860626925322, guid: 2dccc5de572b63549bdfac8cdb2fbad4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7246470608179754744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
