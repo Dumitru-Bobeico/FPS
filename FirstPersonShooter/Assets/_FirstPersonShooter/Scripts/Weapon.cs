@@ -98,40 +98,55 @@ public class Weapon : MonoBehaviour
         ApplyRecoil();
     }
 
-    void Fire()
+void Fire()
+{
+    timePressed += Time.deltaTime;
+    timePressed = Mathf.Min(timePressed, maxRecoilTime);
+
+    playerSoundManager.PlayShootSFX(shootSFXIndex);
+
+    // Muzzle flash
+    if (muzzleFlash != null && muzzleFlashPosition != null)
     {
-        timePressed += Time.deltaTime;
-        timePressed = Mathf.Min(timePressed, maxRecoilTime);
+        GameObject flash = Instantiate(muzzleFlash, muzzleFlashPosition);
+        flash.transform.localPosition = Vector3.zero;
+        flash.transform.localRotation = Quaternion.identity;
+        Destroy(flash, 0.1f);
+    }
 
-        playerSoundManager.PlayShootSFX(shootSFXIndex);
+    Recoil_Script?.RecoilFire();
 
-        // Muzzle flash
-        if (muzzleFlash != null && muzzleFlashPosition != null)
+    // Pellets loop (shotgun spread)
+    for (int i = 0; i < Mathf.Max(1, pelletsCount); i++)
+    {
+        Vector3 direction = camera.transform.forward;
+        direction.x += Random.Range(-sprayMulitplier, sprayMulitplier);
+        direction.y += Random.Range(-sprayMulitplier, sprayMulitplier);
+
+        Ray ray = new Ray(camera.transform.position, direction);
+        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f))
         {
-            GameObject flash = Instantiate(muzzleFlash, muzzleFlashPosition);
-            flash.transform.localPosition = Vector3.zero;
-            flash.transform.localRotation = Quaternion.identity;
-            Destroy(flash, 0.1f);
-        }
-
-        Recoil_Script?.RecoilFire();
-
-        // Pellets loop (shotgun spread)
-        for (int i = 0; i < Mathf.Max(1, pelletsCount); i++)
-        {
-            Vector3 direction = camera.transform.forward;
-            direction.x += Random.Range(-sprayMulitplier, sprayMulitplier);
-            direction.y += Random.Range(-sprayMulitplier, sprayMulitplier);
-
-            Ray ray = new Ray(camera.transform.position, direction);
-            if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f))
+            if (hitVFX != null)
             {
-                if (hitVFX != null)
-                {
-                    GameObject vfx = Instantiate(hitVFX, hit.point, Quaternion.identity);
-                    Destroy(vfx, 1f);
-                }
+                GameObject vfx = Instantiate(hitVFX, hit.point, Quaternion.identity);
+                Destroy(vfx, 1f);
+            }
 
+            // check if hit object has health (enemy or destructible)
+            Health health = hit.transform.GetComponent<Health>();
+            EnemyAI enemy = hit.transform.GetComponent<EnemyAI>();
+
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
+            else if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+            else
+            {
+                // only spawn decal if not enemy
                 if (bulletHolePrefab != null)
                 {
                     Vector3 decalPosition = hit.point + hit.normal * 0.01f;
@@ -139,15 +154,13 @@ public class Weapon : MonoBehaviour
                     GameObject decal = Instantiate(bulletHolePrefab, decalPosition, decalRotation);
                     Destroy(decal, decalLifetime);
                 }
-
-                Health health = hit.transform.GetComponent<Health>();
-                if (health != null)
-                    health.TakeDamage(damage);
             }
         }
-
-        AddRecoil();
     }
+
+    AddRecoil();
+}
+
 
     void AddRecoil()
     {
