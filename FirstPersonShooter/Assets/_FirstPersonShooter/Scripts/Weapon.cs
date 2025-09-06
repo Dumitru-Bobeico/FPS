@@ -57,7 +57,7 @@ public class Weapon : MonoBehaviour
 
     [Header("SFX")]
     public int shootSFXIndex = 0;
-
+    public int reloadSFXIndex = 0;
     public PlayerSoundManager playerSoundManager;
 
     void Start()
@@ -172,6 +172,8 @@ public class Weapon : MonoBehaviour
 
         magText.text = mag.ToString();
         ammoText.text = ammo + "/" + magAmmo;
+        
+        playerSoundManager.PlayReloadSFX(reloadSFXIndex);
     }
 
     public void WeaponBobbing(Vector2 moveInput, bool grounded, float playerSpeed)
