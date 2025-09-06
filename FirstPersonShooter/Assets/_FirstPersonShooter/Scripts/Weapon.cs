@@ -8,7 +8,12 @@ public class Weapon : MonoBehaviour
     public float fireRate;
     public Camera camera;
 
+    [Header("Shotgun Settings")]
+    public int pelletsCount = 1;
+    public float sprayMulitplier = 0f;
+
     private float nextFire;
+    private bool isReloading = false;
 
     [Header("VFX")]
     public GameObject hitVFX;
@@ -16,13 +21,13 @@ public class Weapon : MonoBehaviour
     public Transform muzzleFlashPosition;
 
     [Header("Decals")]
-    public GameObject bulletHolePrefab;  // prefab of bullet hole
-    public float decalLifetime = 30f;    // optional, time before decal disappears
+    public GameObject bulletHolePrefab;  
+    public float decalLifetime = 30f;    
 
     [Header("Ammo")]
-    public int mag = 5;
-    public int ammo = 30;
-    public int magAmmo = 30;
+    public int mag = 5;        // number of spare mags
+    public int ammo = 30;      // current ammo in mag
+    public int magAmmo = 30;   // max ammo per mag
 
     [Header("UI")]
     public TextMeshProUGUI magText;
@@ -52,8 +57,8 @@ public class Weapon : MonoBehaviour
     [Range(0f, 10f)] public float maxRecoilTime;
     private float timePressed;
 
-    private Vector2 recoilOffset;     // current recoil offset
-    private Vector2 recoilVelocity;   // for SmoothDamp
+    private Vector2 recoilOffset;     
+    private Vector2 recoilVelocity;   
 
     [Header("SFX")]
     public int shootSFXIndex = 0;
@@ -63,22 +68,20 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         initialLocalPos = transform.localPosition;
-        magText.text = mag.ToString();
-        ammoText.text = ammo + "/" + magAmmo;
+        UpdateUI();
     }
 
     void Update()
     {
         if (nextFire > 0) nextFire -= Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && nextFire <= 0 && ammo > 0 && animation.isPlaying == false)
+        // Shoot
+        if (Input.GetMouseButton(0) && nextFire <= 0 && ammo > 0 && !isReloading)
         {
             nextFire = 1 / fireRate;
             ammo--;
 
-            magText.text = mag.ToString();
-            ammoText.text = ammo + "/" + magAmmo;
-
+            UpdateUI();
             Fire();
         }
         else
@@ -86,7 +89,8 @@ public class Weapon : MonoBehaviour
             timePressed = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && mag > 0)
+        // Reload
+        if (Input.GetKeyDown(KeyCode.R) && mag > 0 && ammo < magAmmo && !isReloading)
         {
             Reload();
         }
@@ -98,10 +102,10 @@ public class Weapon : MonoBehaviour
     {
         timePressed += Time.deltaTime;
         timePressed = Mathf.Min(timePressed, maxRecoilTime);
-        
+
         playerSoundManager.PlayShootSFX(shootSFXIndex);
 
-        // Spawn muzzle flash as child to follow gun movement
+        // Muzzle flash
         if (muzzleFlash != null && muzzleFlashPosition != null)
         {
             GameObject flash = Instantiate(muzzleFlash, muzzleFlashPosition);
@@ -110,37 +114,38 @@ public class Weapon : MonoBehaviour
             Destroy(flash, 0.1f);
         }
 
-
         Recoil_Script?.RecoilFire();
 
-        // Raycast for hit detection
-        Ray ray = new Ray(camera.transform.position, camera.transform.forward);
-        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f))
+        // Pellets loop (shotgun spread)
+        for (int i = 0; i < Mathf.Max(1, pelletsCount); i++)
         {
-            // Hit VFX
-            if (hitVFX != null)
+            Vector3 direction = camera.transform.forward;
+            direction.x += Random.Range(-sprayMulitplier, sprayMulitplier);
+            direction.y += Random.Range(-sprayMulitplier, sprayMulitplier);
+
+            Ray ray = new Ray(camera.transform.position, direction);
+            if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f))
             {
-                GameObject vfx = Instantiate(hitVFX, hit.point, Quaternion.identity);
-                Destroy(vfx, 1f);
+                if (hitVFX != null)
+                {
+                    GameObject vfx = Instantiate(hitVFX, hit.point, Quaternion.identity);
+                    Destroy(vfx, 1f);
+                }
+
+                if (bulletHolePrefab != null)
+                {
+                    Vector3 decalPosition = hit.point + hit.normal * 0.01f;
+                    Quaternion decalRotation = Quaternion.LookRotation(hit.normal) * Quaternion.Euler(0f, 180f, 0f);
+                    GameObject decal = Instantiate(bulletHolePrefab, decalPosition, decalRotation);
+                    Destroy(decal, decalLifetime);
+                }
+
+                Health health = hit.transform.GetComponent<Health>();
+                if (health != null)
+                    health.TakeDamage(damage);
             }
-
-            // Bullet hole decal
-            if (bulletHolePrefab != null)
-            {
-                Vector3 decalPosition = hit.point + hit.normal * 0.01f; // offset forward
-                Quaternion decalRotation = Quaternion.LookRotation(hit.normal) * Quaternion.Euler(0f, 180f, 0f); // flip quad
-
-                GameObject decal = Instantiate(bulletHolePrefab, decalPosition, decalRotation);
-                Destroy(decal, decalLifetime);
-            }
-
-            // Apply damage
-            Health health = hit.transform.GetComponent<Health>();
-            if (health != null)
-                health.TakeDamage(damage);
         }
 
-        // Add recoil
         AddRecoil();
     }
 
@@ -153,27 +158,36 @@ public class Weapon : MonoBehaviour
 
     void ApplyRecoil()
     {
-        // Smoothly return recoilOffset to zero
         recoilOffset = Vector2.SmoothDamp(recoilOffset, Vector2.zero, ref recoilVelocity, 0.2f);
-
-        // Apply to camera rotation
         camera.transform.localRotation = Quaternion.Euler(-recoilOffset.y, recoilOffset.x, 0f);
     }
 
     void Reload()
     {
+        isReloading = true;
         animation.Play(reload.name);
+        playerSoundManager.PlayReloadSFX(reloadSFXIndex);
 
+        // Call FinishReload after animation ends
+        Invoke(nameof(FinishReload), reload.length);
+    }
+
+    void FinishReload()
+    {
         if (mag > 0)
         {
             mag--;
             ammo = magAmmo;
         }
 
-        magText.text = mag.ToString();
-        ammoText.text = ammo + "/" + magAmmo;
-        
-        playerSoundManager.PlayReloadSFX(reloadSFXIndex);
+        UpdateUI();
+        isReloading = false;
+    }
+
+    void UpdateUI()
+    {
+        if (magText != null) magText.text = mag.ToString();
+        if (ammoText != null) ammoText.text = ammo + "/" + magAmmo;
     }
 
     public void WeaponBobbing(Vector2 moveInput, bool grounded, float playerSpeed)
