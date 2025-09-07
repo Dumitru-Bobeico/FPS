@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_FirstPersonShooter/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/_FirstPersonShooter/Scenes/MainMenu.unity
+    guid: 0e869468409e68d4fb82e6dacc1ed208
+  - enabled: 1
+    path: Assets/_FirstPersonShooter/Scenes/MainScene.unity
+    guid: 1ae1f5b4f09e44a48818350b814b01b6
+  - enabled: 1
+    path: Assets/_FirstPersonShooter/Scenes/Level01.unity
+    guid: f66cac73a9463554190265725739fa7d
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
